@@ -50,7 +50,7 @@ function App() {
   };
 
   function connectToScaledrone() {
-    const drone = new window.Scaledrone("scaledrone_id", {
+    const drone = new window.Scaledrone("scaledrone id", {
       data: user,
     });
     drone.on("open", (error) => {

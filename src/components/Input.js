@@ -4,7 +4,7 @@ const Input = ({ onChange, onSend, message }) => {
     onSend(message);
   };
   return (
-    <div className="input-wrapper">
+    <form className="input-wrapper" onSubmit={onSubmit}>
       {" "}
       <input
         type="text"
@@ -13,10 +13,10 @@ const Input = ({ onChange, onSend, message }) => {
         value={message}
         className="chat-input"
       />
-      <button type="submit" onClick={onSubmit} className="send-button">
+      <button type="submit" className="send-button">
         Send
       </button>
-    </div>
+    </form>
   );
 };
 
