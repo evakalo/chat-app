@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Message from "./components/Message";
 import Input from "./components/Input";
@@ -13,6 +13,16 @@ function App() {
       "hazy",
       "huge",
       "melancolic",
+      "bonkers",
+      "colossal",
+      "far-fetched",
+      "fanciful",
+      "insane",
+      "outlandish",
+      "preposterous",
+      "quirky",
+      "wacky",
+      "wild",
     ];
     const nouns = [
       "dragon",
@@ -23,31 +33,78 @@ function App() {
       "syrup",
       "pizza",
       "pudding",
+      "philospher",
+      "artist",
+      "writer",
+      "astronaut",
+      "actor",
     ];
+
     return (
       adjs[Math.floor(Math.random() * adjs.length)] +
       "_" +
       nouns[Math.floor(Math.random() * nouns.length)]
     );
   }
+  function getRandomImage() {
+    const images = [
+      "/images/bear.png",
+      "/images/cow.png",
+      "/images/cat.png",
+      "/images/pelican.png",
+      "/images/crab.png",
+      "/images/dog.png",
+      "/images/elephant.png",
+      "/images/octopus.png",
+      "/images/owl.png",
+      "/images/sheep.png",
+      "/images/turtle.png",
+      "/images/unicorn.png",
+      "/images/wolf.png",
+      "/images/rabbit.png",
+      "/images/fish.png",
+      "/images/jaguar.png",
+    ];
 
-  function getRandomColor() {
-    return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+    return images[Math.floor(Math.random() * images.length)];
   }
+  function getRandomColor(excludedColor) {
+    let randomColor;
+    do {
+      randomColor = "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+    } while (randomColor === excludedColor);
+    return randomColor;
+  }
+  const excludedColor = "#7EB4C8";
+  getRandomColor(excludedColor);
+
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [members, setMembers] = useState([]);
+  const [buttonDisable, setButtonDisable] = useState(false);
   const [drone, setDrone] = useState(null);
+  const [members, setMembers] = useState([
+    {
+      id: "",
+      clientData: {
+        color: "",
+        username: "",
+        image: "",
+      },
+    },
+  ]);
   const [user, setUser] = useState({
     name: getRandomName(),
     color: getRandomColor(),
-    id: null,
+    image: getRandomImage(),
   });
   const onChange = (e) => {
     let value = e.target.value;
+    setButtonDisable(false);
     setMessage(value);
     console.log(message);
   };
+  const membersRef = useRef();
+  membersRef.current = members;
 
   function connectToScaledrone() {
     const drone = new window.Scaledrone("scaledrone id", {
@@ -59,14 +116,14 @@ function App() {
         return console.error(error);
       }
       user.id = drone.clientId;
-      setUser((prevUser) => ({
-        ...prevUser,
+      setUser((prevData) => ({
+        ...prevData,
         id: drone.clientId,
       }));
       console.log("Successfully connected to Scaledrone", user);
     });
 
-    const room = drone.subscribe("observable-love");
+    const room = drone.subscribe("observable-love-eva");
 
     room.on("open", (error) => {
       if (error) {
@@ -76,10 +133,15 @@ function App() {
     });
     room.on("members", (members) => {
       setMembers(members);
-      console.log(members);
     });
     room.on("member_join", (member) => {
-      setMembers([...members, member]);
+      setMembers([...membersRef.current, member]);
+    });
+    room.on("member_leave", ({ id }) => {
+      const index = membersRef.current.findIndex((m) => m.id === id);
+      const newMembers = [...membersRef.current];
+      newMembers.splice(index, 1);
+      setMembers(newMembers);
     });
     room.on("message", (message) => {
       setMessages((prev) => {
@@ -94,23 +156,51 @@ function App() {
       connectToScaledrone();
     }
   }, []);
+
+  // const send = async (message) => {
+  //   if (!message) {
+  //     setButtonDisable(true);
+  //   }
+  //   setMessage(message);
+  //   console.log(message);
+
+  //   await drone.publish({
+  //     room: "observable-love-eva",
+  //     message: message,
+  //   });
+  //   setMessage("");
+  // };
   const send = async (message) => {
-    setMessage(message);
-    console.log(message);
+    try {
+      if (message === "") {
+        setButtonDisable(true);
+        console.error("Message cannot be empty");
+        return;
+      }
 
-    await drone.publish({
-      room: "observable-love",
-      message: message,
-    });
-    setMessage("");
+      setMessage(message);
+      console.log(message);
+
+      await drone.publish({
+        room: "observable-love-eva",
+        message: message,
+      });
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
-
   return (
     <div className="app-wrapper">
       <Members members={members} />
       <div className="chat-wrapper">
         <Message messages={messages} user={user} />
-        <Input onChange={onChange} onSend={send} message={message} />
+        <Input
+          onChange={onChange}
+          onSend={send}
+          message={message}
+          disable={buttonDisable}
+        />
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
-const Input = ({ onChange, onSend, message }) => {
+const Input = ({ onChange, onSend, message, disable }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     onSend(message);
   };
+
   return (
     <form className="input-wrapper" onSubmit={onSubmit}>
       {" "}
@@ -13,7 +14,7 @@ const Input = ({ onChange, onSend, message }) => {
         value={message}
         className="chat-input"
       />
-      <button type="submit" className="send-button">
+      <button type="submit" className="send-button" disabled={disable}>
         Send
       </button>
     </form>
