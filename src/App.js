@@ -105,9 +105,10 @@ function App() {
   };
   const membersRef = useRef();
   membersRef.current = members;
-
+  // const messagesRef = useRef();
+  // messagesRef.current = messages;
   function connectToScaledrone() {
-    const drone = new window.Scaledrone("scaledrone id", {
+    const drone = new window.Scaledrone("scaledrone-id", {
       data: user,
     });
     drone.on("open", (error) => {
@@ -155,21 +156,9 @@ function App() {
     if (drone === null) {
       connectToScaledrone();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const send = async (message) => {
-  //   if (!message) {
-  //     setButtonDisable(true);
-  //   }
-  //   setMessage(message);
-  //   console.log(message);
-
-  //   await drone.publish({
-  //     room: "observable-love-eva",
-  //     message: message,
-  //   });
-  //   setMessage("");
-  // };
   const send = async (message) => {
     try {
       if (message === "") {
