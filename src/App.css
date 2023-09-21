@@ -20,6 +20,8 @@
   flex-direction: column;
   justify-content: space-between;
   width: 30%;
+  overflow-y: auto;
+  padding-right: 10px;
 }
 .messages-wrapper {
   width: 100%;
@@ -43,7 +45,8 @@
   height: 30px;
   margin: 4px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  align-self: flex-start;
   justify-content: center;
   /* color: white;
   border-radius: 50%; */
@@ -52,12 +55,14 @@
   background-color: #072b39;
   padding: 10px 10%;
   color: antiquewhite;
-
+  width: 80%;
+  word-wrap: break-word;
+  overflow-x: hidden;
   border-radius: 15px;
 }
 .message {
   display: flex;
-  width: 100%;
+  width: 80%;
   align-items: center;
   border-radius: 4px;
   color: #072b39;
@@ -68,14 +73,19 @@
   height: 30px;
   display: flex;
   margin: 4px;
-  align-items: center;
+  align-items: flex-start;
+  align-self: flex-start;
   justify-content: center;
   /* border-radius: 50%; */
 }
 .message-text {
   background-color: #abdff1;
+
   padding: 10px 10%;
+  width: 90%;
   border-radius: 15px;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 .otherUser {
   display: flex;
@@ -125,12 +135,19 @@
   margin: 5px 0px;
 }
 .chat-input {
-  padding: 10px 10%;
+  padding: 10px 20px;
   border: none;
   font-size: 16px;
   text-align: left;
   border-radius: 4px;
   background-color: white;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  resize: none;
+  height: 40px;
+  min-height: 20px;
+  max-height: 200px;
+  width: 30%;
 }
 .send-button {
   background-color: #ef6c33;
@@ -152,6 +169,9 @@
     display: flex;
     flex-wrap: wrap;
   }
+  .messages-container {
+    width: 50%;
+  }
 }
 @media (max-width: 890px) {
   .members {
@@ -162,12 +182,15 @@
   .member-wrapper {
     width: 100%;
   }
+  .chat-input {
+    width: 40%;
+    word-break: break-all;
+  }
   .input-wrapper {
     display: flex;
     gap: 10px;
     width: 100%;
-    padding-top: 5px;
-
+    /* padding-top: 5px; */
     justify-content: center;
     align-items: center;
     margin: 5px 0px;
@@ -185,11 +208,26 @@
   .chat-wrapper {
     width: 100%;
   }
+
+  .chat-input {
+    width: 50%;
+    word-break: break-all;
+  }
   .messages-container {
     width: 70%;
   }
 }
 @media (max-width: 500px) {
+  .message-text {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    max-width: 80%;
+  }
+  .myMessage .message-text {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    max-width: 80%;
+  }
   .chat-wrapper {
     width: 100%;
     align-items: center;
@@ -199,7 +237,8 @@
     align-items: center;
   }
   .chat-input {
-    width: 100%;
+    width: 80%;
+    word-break: break-all;
   }
   .messages-container {
     display: flex;

@@ -7,13 +7,13 @@ const Input = ({ onChange, onSend, message, disable }) => {
   return (
     <form className="input-wrapper" onSubmit={onSubmit}>
       {" "}
-      <input
+      <textarea
         type="text"
         name="input"
         onChange={onChange}
         value={message}
         className="chat-input"
-      />
+      ></textarea>
       <button type="submit" className="send-button" disabled={disable}>
         Send
       </button>

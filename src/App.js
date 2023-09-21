@@ -101,7 +101,7 @@ function App() {
     let value = e.target.value;
     setButtonDisable(false);
     setMessage(value);
-    console.log(message);
+    // console.log(message);
   };
   const membersRef = useRef();
   membersRef.current = members;
@@ -120,7 +120,7 @@ function App() {
         ...prevData,
         id: drone.clientId,
       }));
-      console.log("Successfully connected to Scaledrone", user);
+      // console.log("Successfully connected to Scaledrone", user);
     });
 
     const room = drone.subscribe("observable-love-eva");
@@ -129,7 +129,7 @@ function App() {
       if (error) {
         return console.error(error);
       }
-      console.log("Successfully joined the room");
+      // console.log("Successfully joined the room");
     });
     room.on("members", (members) => {
       setMembers(members);
@@ -147,7 +147,7 @@ function App() {
       setMessages((prev) => {
         return [...prev, message];
       });
-      console.log("New Message", message);
+      // console.log("New Message", message);
     });
   }
 
@@ -162,12 +162,12 @@ function App() {
     try {
       if (message === "") {
         setButtonDisable(true);
-        console.error("Message cannot be empty");
+        // console.error("Message cannot be empty");
         return;
       }
 
       setMessage(message);
-      console.log(message);
+      //  console.log(message);
 
       await drone.publish({
         room: "observable-love-eva",
@@ -175,7 +175,7 @@ function App() {
       });
       setMessage("");
     } catch (error) {
-      console.error("Error sending message:", error);
+      //console.error("Error sending message:", error);
     }
   };
   return (
