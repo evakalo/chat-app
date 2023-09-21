@@ -6,7 +6,6 @@ const Message = ({ messages, user }) => {
         const styleMessage = username === user.name ? "myMessage" : "message";
         const styleUser = username === user.name ? "me" : "otherUser";
         const image = message.member.clientData.image;
-        // const color = message.member.clientData.color;
 
         return (
           <div className="messages-wrapper" key={message.id}>

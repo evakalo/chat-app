@@ -5,7 +5,7 @@ import Input from "./components/Input";
 import Members from "./components/Members";
 function App() {
   function getRandomName() {
-    const adjs = [
+    const adjectives = [
       "whimsical",
       "purple",
       "eccentric",
@@ -41,7 +41,7 @@ function App() {
     ];
 
     return (
-      adjs[Math.floor(Math.random() * adjs.length)] +
+      adjectives[Math.floor(Math.random() * adjectives.length)] +
       "_" +
       nouns[Math.floor(Math.random() * nouns.length)]
     );
@@ -105,10 +105,9 @@ function App() {
   };
   const membersRef = useRef();
   membersRef.current = members;
-  // const messagesRef = useRef();
-  // messagesRef.current = messages;
+
   function connectToScaledrone() {
-    const drone = new window.Scaledrone("scaledrone-id", {
+    const drone = new window.Scaledrone("0eEofPL4waUDRDBH", {
       data: user,
     });
     drone.on("open", (error) => {
@@ -130,7 +129,7 @@ function App() {
       if (error) {
         return console.error(error);
       }
-      console.log("Successfully join the room");
+      console.log("Successfully joined the room");
     });
     room.on("members", (members) => {
       setMembers(members);
