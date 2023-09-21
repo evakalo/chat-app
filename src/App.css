@@ -55,14 +55,14 @@
   background-color: #072b39;
   padding: 10px 10%;
   color: antiquewhite;
-  width: 80%;
+  width: 60%;
   word-wrap: break-word;
   overflow-x: hidden;
   border-radius: 15px;
 }
 .message {
   display: flex;
-  width: 80%;
+  width: 60%;
   align-items: center;
   border-radius: 4px;
   color: #072b39;
