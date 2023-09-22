@@ -55,14 +55,14 @@
   background-color: #072b39;
   padding: 10px 10%;
   color: antiquewhite;
-  width: 60%;
+  width: 70%;
   word-wrap: break-word;
   overflow-x: hidden;
   border-radius: 15px;
 }
 .message {
   display: flex;
-  width: 60%;
+  width: 80%;
   align-items: center;
   border-radius: 4px;
   color: #072b39;
@@ -162,18 +162,62 @@
   background-color: #dd8763;
 }
 @media (max-width: 1180px) {
-  .members {
-    padding-left: 20px;
+  .message-text {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    width: 70%;
+    padding: 20px;
+  }
+  .message {
+    width: 100%;
+  }
+  .myMessage {
+    width: 100%;
+  }
+  .myMessage .message-text {
+    width: 60%;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    border-radius: 15px;
+    padding: 20px;
   }
   .message-text {
     display: flex;
+    width: 60%;
     flex-wrap: wrap;
   }
+  .members {
+    padding-left: 20px;
+  }
+
   .messages-container {
     width: 50%;
   }
+  .chat-input {
+    width: 40%;
+    word-break: break-all;
+  }
 }
 @media (max-width: 890px) {
+  .message-text {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    width: 80%;
+    padding: 20px;
+  }
+  .message {
+    width: 100%;
+  }
+  .myMessage {
+    width: 100%;
+  }
+  .myMessage .message-text {
+    width: 80%;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    border-radius: 15px;
+    padding: 20px;
+  }
   .members {
     padding-left: 10px;
     width: 22%;
@@ -201,6 +245,22 @@
 }
 
 @media (max-width: 700px) {
+  .message-text {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    width: 80%;
+    padding: 20px;
+  }
+  .message {
+    width: 100%;
+  }
+  .myMessage .message-text {
+    width: 80%;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    border-radius: 15px;
+    padding: 20px;
+  }
   .members {
     display: none;
     width: 0%;
@@ -218,16 +278,6 @@
   }
 }
 @media (max-width: 500px) {
-  .message-text {
-    word-wrap: break-word;
-    overflow-x: hidden;
-    max-width: 80%;
-  }
-  .myMessage .message-text {
-    word-wrap: break-word;
-    overflow-x: hidden;
-    max-width: 80%;
-  }
   .chat-wrapper {
     width: 100%;
     align-items: center;
@@ -245,5 +295,19 @@
     flex-direction: column;
     justify-content: space-between;
     width: 80%;
+  }
+  .message-text {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    width: 80%;
+  }
+  .message {
+    width: 100%;
+  }
+  .myMessage .message-text {
+    width: 80%;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    border-radius: 15px;
   }
 }
