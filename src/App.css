@@ -40,6 +40,13 @@
   justify-content: flex-end;
   color: gray;
 }
+.message {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-radius: 4px;
+  color: #072b39;
+}
 .myMessage .message-photo {
   width: 30px;
   height: 30px;
@@ -48,25 +55,25 @@
   align-items: flex-start;
   align-self: flex-start;
   justify-content: center;
-  /* color: white;
-  border-radius: 50%; */
 }
 .myMessage .message-text {
   background-color: #072b39;
   padding: 10px 10%;
   color: antiquewhite;
-  width: 70%;
+  width: 60%;
   word-wrap: break-word;
   overflow-x: hidden;
   border-radius: 15px;
 }
-.message {
-  display: flex;
-  width: 80%;
-  align-items: center;
-  border-radius: 4px;
-  color: #072b39;
+.message-text {
+  background-color: #abdff1;
+  padding: 10px 10%;
+  width: 60%;
+  border-radius: 15px;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
+
 .message-photo {
   order: -1;
   width: 30px;
@@ -78,15 +85,7 @@
   justify-content: center;
   /* border-radius: 50%; */
 }
-.message-text {
-  background-color: #abdff1;
 
-  padding: 10px 10%;
-  width: 90%;
-  border-radius: 15px;
-  word-wrap: break-word;
-  overflow-x: hidden;
-}
 .otherUser {
   display: flex;
   width: 100%;
